@@ -26,6 +26,9 @@ import static javafx.scene.paint.Color.WHITE;
 public class Maze extends Application implements EventHandler<KeyEvent> {
 
     private Stage window;
+    private int playerXpos = 920;
+    private int playerYpos = 300;
+    private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 20, 20);
 
     @Override
     public void start(Stage stage) {
@@ -90,6 +93,10 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             }
         });
 
+        playButton.setFocusTraversable(false);
+        scoreButton.setFocusTraversable(false);
+        quitButton.setFocusTraversable(false);
+
         // adds all the button to root so it shows up
         root.getChildren().addAll(playButton, scoreButton, quitButton, title);
 
@@ -100,6 +107,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         Group root2;
         root2 = new Group();
         Scene playGameScene = new Scene(root2,1920, 1080, Color.GREY);
+
+        playGameScene.setOnKeyPressed(this);
 
         Text title = new Text(900,100,"Maze Game");
         title.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.ITALIC, 80));
@@ -141,9 +150,12 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             }
         });
 
+        mainMenuButton.setFocusTraversable(false);
+        quitButton.setFocusTraversable(false);
 
+        recPlayer.setFill(Color.rgb(255, 0, 0));
 
-        root2.getChildren().addAll(mainMenuButton,quitButton,title,levelTitle);
+        root2.getChildren().addAll(mainMenuButton,quitButton,title,levelTitle, recPlayer);
 
         return playGameScene;
     }
@@ -193,6 +205,9 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             }
         });
 
+        mainMenuButton.setFocusTraversable(false);
+        quitButton.setFocusTraversable(false);
+
         root3.getChildren().addAll(mainMenuButton,quitButton,title, scoreTitle);
 
         return scoreScene;
@@ -207,16 +222,20 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent event){
         if(event.getCode() == KeyCode.DOWN){
-
+            playerYpos += 20;
+            recPlayer.setY(playerYpos);
         }
         if(event.getCode() == KeyCode.UP){
-
+            playerYpos -= 20;
+            recPlayer.setY(playerYpos);
         }
         if(event.getCode() == KeyCode.LEFT){
-
+            playerXpos -= 20;
+            recPlayer.setX(playerXpos);
         }
         if(event.getCode() == KeyCode.RIGHT){
-
+            playerXpos += 20;
+            recPlayer.setX(playerXpos);
         }
     }
 }
