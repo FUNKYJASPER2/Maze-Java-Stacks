@@ -26,11 +26,16 @@ import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
 
 public class Maze extends Application implements EventHandler<KeyEvent> {
-    RandomMaze maze = new RandomMaze(10);
+    RandomMaze maze = new RandomMaze(15);
+    private double startX = 500;
+    private double startY = 300;
     private Stage window;
-    private int playerXpos = 920;
-    private int playerYpos = 300;
-    private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 20, 20);
+    private double playerXpos = startX+2;
+    private double playerYpos = startY+2;
+    private int playRow = 0;
+    private int playCol = 0;
+    private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 16, 16);
+
 
 
     @Override
@@ -159,17 +164,20 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         quitButton.setFocusTraversable(false);
 
         recPlayer.setFill(Color.rgb(255, 0, 0));
+        recPlayer.setStroke(BLACK);
 
         // draws the maze for level 1
 
-        double gridPosX = 600;
-        double gridPosY = 300;
+        double gridPosX = startX;
+        double gridPosY = startY;
         double tempX;
         double tempY;
 
         for (int i = 0;i < maze.getSize();i++){
             for (int j = 0;j < maze.getSize();j++){
-
+                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);
+                mazerec.setFill(Color.rgb(150, 0, 150));
+                root2.getChildren().add(mazerec);
                 tempX = gridPosX;
                 tempY = gridPosY;
 
@@ -206,7 +214,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                 }
                 gridPosX+=20;
             }
-            gridPosX = 600;
+            gridPosX = startX;
             gridPosY += 20;
         }
 /*
@@ -299,21 +307,25 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event){
-        if(event.getCode() == KeyCode.DOWN){
+        if(event.getCode() == KeyCode.DOWN && !maze.getMaze()[playRow][playCol].isDownWall()){
             playerYpos += 20;
             recPlayer.setY(playerYpos);
+            playRow++;
         }
-        if(event.getCode() == KeyCode.UP){
+        if(event.getCode() == KeyCode.UP && !maze.getMaze()[playRow][playCol].isUpWall()){
             playerYpos -= 20;
             recPlayer.setY(playerYpos);
+            playRow--;
         }
-        if(event.getCode() == KeyCode.LEFT){
+        if(event.getCode() == KeyCode.LEFT && !maze.getMaze()[playRow][playCol].isLeftWall()){
             playerXpos -= 20;
             recPlayer.setX(playerXpos);
+            playCol--;
         }
-        if(event.getCode() == KeyCode.RIGHT){
+        if(event.getCode() == KeyCode.RIGHT && !maze.getMaze()[playRow][playCol].isRightWall()){
             playerXpos += 20;
             recPlayer.setX(playerXpos);
+            playCol++;
         }
     }
 }
