@@ -118,3 +118,20 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 }
 
 
+
+
+/* Things to add ----------------------------------------------------------
+
+// level 1
+// level 2
+// level 3
+// high score
+// printing maze
+// limited movements
+
+**** this is dont by printing squares with lines where they need to be than, checks players coordinate and if they are match
+**** the certian cooridnate than the user can only move set ways
+
+
+*/
+
