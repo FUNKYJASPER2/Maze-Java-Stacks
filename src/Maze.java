@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
 
@@ -154,6 +155,34 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         quitButton.setFocusTraversable(false);
 
         recPlayer.setFill(Color.rgb(255, 0, 0));
+
+        // draws the maze for level 1
+
+        double gridPosX = 600;
+        double gridPosY = 300;
+
+        for(int i = 0; i <= 10; i++){
+            for(int k = 0; k <= 10; k++){
+                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);
+                // added borders to tell its not just one big square
+                mazerec.setStrokeWidth(1);
+                mazerec.setStroke(BLACK);
+                // -------------------------------------------
+                mazerec.setFill(Color.rgb(150, 0, 150));
+                root2.getChildren().add(mazerec);
+                gridPosX += 20;
+            }
+            gridPosX = 600;
+            gridPosY += 20;
+        }
+
+
+
+
+
+
+
+
 
         root2.getChildren().addAll(mainMenuButton,quitButton,title,levelTitle, recPlayer);
 
