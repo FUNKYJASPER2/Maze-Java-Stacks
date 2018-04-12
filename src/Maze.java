@@ -19,20 +19,24 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import java.util.Scanner;
 
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
 
 public class Maze extends Application implements EventHandler<KeyEvent> {
-
+    RandomMaze maze = new RandomMaze(10);
     private Stage window;
     private int playerXpos = 920;
     private int playerYpos = 300;
     private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 20, 20);
 
+
     @Override
     public void start(Stage stage) {
+        maze.initialize();
+        maze.createMaze();
         window = stage;
         // title set and buttons added to the screen
         stage.setTitle("Maze Game");
@@ -160,7 +164,52 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
         double gridPosX = 600;
         double gridPosY = 300;
+        double tempX;
+        double tempY;
 
+        for (int i = 0;i < maze.getSize();i++){
+            for (int j = 0;j < maze.getSize();j++){
+
+                tempX = gridPosX;
+                tempY = gridPosY;
+
+                if (maze.getMaze()[i][j].isUpWall()) {
+                    Line line = new Line(tempX,tempY,tempX+20,tempY);
+                    line.setStrokeWidth(1);
+                    root2.getChildren().add(line);
+
+
+                }
+                if (maze.getMaze()[i][j].isRightWall()) {
+                    tempX = gridPosX;
+                    tempY = gridPosY;
+                    Line line = new Line(tempX+20,tempY,tempX+20,tempY+20);
+                    line.setStrokeWidth(1);
+                    root2.getChildren().add(line);
+
+                }
+                if (maze.getMaze()[i][j].isDownWall()) {
+                    tempX = gridPosX;
+                    tempY = gridPosY;
+                    Line line = new Line(tempX,tempY+20,tempX+20,tempY+20);
+                    line.setStrokeWidth(1);
+                    root2.getChildren().add(line);
+
+                }
+                if (maze.getMaze()[i][j].isLeftWall()) {
+                    tempX = gridPosX;
+                    tempY = gridPosY;
+                    Line line = new Line(tempX,tempY,tempX,tempY+20);
+                    line.setStrokeWidth(1);
+                    root2.getChildren().add(line);
+
+                }
+                gridPosX+=20;
+            }
+            gridPosX = 600;
+            gridPosY += 20;
+        }
+/*
         for(int i = 0; i <= 10; i++){
             for(int k = 0; k <= 10; k++){
                 Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);
@@ -175,7 +224,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             gridPosX = 600;
             gridPosY += 20;
         }
-
+*/
 
 
 

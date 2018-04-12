@@ -86,6 +86,9 @@ public class Tile {
             newTile.setRightWall(false);
         }
     }
+    public String toString(){
+        return "UpWall: " + upWall + "\nRightWall: " + rightWall + "\nLeftWall: " + leftWall + "\nDownWall: " + downWall;
+    }
 
 
 
