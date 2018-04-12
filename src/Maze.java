@@ -73,7 +73,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         scoreButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                // set new scene
+                window.setScene(scoreScene());
             }
         });
 
@@ -108,14 +108,19 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         title.setY(100);
 
 
+        Text levelTitle = new Text(900,100,"Level 1");
+        levelTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        levelTitle.setFill(WHITE);
+        levelTitle.setX(850);
+        levelTitle.setY(200);
 
-        Button mainMunuButton = new Button("Main Menu");
-        mainMunuButton.setTranslateX(100);
-        mainMunuButton.setTranslateY(50);
-        mainMunuButton.setMinSize(200,50);
-        mainMunuButton.setStyle("-fx-font-size: 2em; ");
+        Button mainMenuButton = new Button("Main Menu");
+        mainMenuButton.setTranslateX(100);
+        mainMenuButton.setTranslateY(50);
+        mainMenuButton.setMinSize(200,50);
+        mainMenuButton.setStyle("-fx-font-size: 2em; ");
         // event handler for when its clicked and changes the color
-        mainMunuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        mainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 window.setScene(mainMenu());
@@ -138,14 +143,59 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
 
 
-
-
-
-
-
-        root2.getChildren().addAll(mainMunuButton,quitButton,title);
+        root2.getChildren().addAll(mainMenuButton,quitButton,title,levelTitle);
 
         return playGameScene;
+    }
+
+    public Scene scoreScene(){
+        Group root3;
+        root3 = new Group();
+        Scene scoreScene = new Scene(root3,1920, 1080, Color.GREY);
+
+        Text title = new Text(900,100,"Maze Game");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.ITALIC, 80));
+        title.setFill(WHITE);
+        title.setX(725);
+        title.setY(100);
+
+        Text scoreTitle = new Text(900,100,"High Scores");
+        scoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        scoreTitle.setFill(WHITE);
+        scoreTitle.setX(800);
+        scoreTitle.setY(200);
+
+
+        Button mainMenuButton = new Button("Main Menu");
+        mainMenuButton.setTranslateX(100);
+        mainMenuButton.setTranslateY(50);
+        mainMenuButton.setMinSize(200,50);
+        mainMenuButton.setStyle("-fx-font-size: 2em; ");
+        // event handler for when its clicked and changes the color
+        mainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                window.setScene(mainMenu());
+            }
+        });
+
+
+        Button quitButton = new Button("Quit");
+        quitButton.setTranslateX(1620);
+        quitButton.setTranslateY(50);
+        quitButton.setMinSize(200,50);
+        quitButton.setStyle("-fx-font-size: 2em; ");
+        // event handler for when its clicked and changes the color
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.exit(1);
+            }
+        });
+
+        root3.getChildren().addAll(mainMenuButton,quitButton,title, scoreTitle);
+
+        return scoreScene;
     }
 
 
