@@ -25,12 +25,20 @@ import static javafx.scene.paint.Color.WHITE;
 
 public class Maze extends Application implements EventHandler<KeyEvent> {
 
-    private Line line;
-    private Group root;
-    private Color color = Color.RED;
+    private Stage window;
 
     @Override
     public void start(Stage stage) {
+        window = stage;
+        // title set and buttons added to the screen
+        stage.setTitle("Maze Game");
+        stage.setScene(mainMenu());
+        stage.setMaximized(true);
+        stage.show();
+    }
+
+    public Scene mainMenu(){
+        Group root;
         root = new Group();
 
 
@@ -41,14 +49,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         title.setY(100);
 
         // scene is created
-        Scene scene = new Scene(root, 500, 500, Color.GRAY);
-
-        // title set and buttons added to the screen
-        stage.setTitle("Elastic Lines");
-        stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.show();
-
+        Scene mainMenuScene = new Scene(root, 1920, 1080, Color.GRAY);
 
         Button playButton = new Button("Play");
         playButton.setTranslateX(750);
@@ -59,7 +60,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                // set new scene
+                window.setScene(playGameScene());
             }
         });
 
@@ -90,8 +91,61 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         });
 
         // adds all the button to root so it shows up
-        root.getChildren().addAll(playButton, scoreButton, quitButton,title);
+        root.getChildren().addAll(playButton, scoreButton, quitButton, title);
 
+        return mainMenuScene;
+    }
+
+    public Scene playGameScene(){
+        Group root2;
+        root2 = new Group();
+        Scene playGameScene = new Scene(root2,1920, 1080, Color.GREY);
+
+        Text title = new Text(900,100,"Maze Game");
+        title.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.ITALIC, 80));
+        title.setFill(WHITE);
+        title.setX(725);
+        title.setY(100);
+
+
+
+        Button mainMunuButton = new Button("Main Menu");
+        mainMunuButton.setTranslateX(100);
+        mainMunuButton.setTranslateY(50);
+        mainMunuButton.setMinSize(200,50);
+        mainMunuButton.setStyle("-fx-font-size: 2em; ");
+        // event handler for when its clicked and changes the color
+        mainMunuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                window.setScene(mainMenu());
+            }
+        });
+
+
+        Button quitButton = new Button("Quit");
+        quitButton.setTranslateX(1620);
+        quitButton.setTranslateY(50);
+        quitButton.setMinSize(200,50);
+        quitButton.setStyle("-fx-font-size: 2em; ");
+        // event handler for when its clicked and changes the color
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.exit(1);
+            }
+        });
+
+
+
+
+
+
+
+
+        root2.getChildren().addAll(mainMunuButton,quitButton,title);
+
+        return playGameScene;
     }
 
 
