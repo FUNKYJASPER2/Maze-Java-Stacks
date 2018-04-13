@@ -1,0 +1,143 @@
+.button{
+    -fx-font-size: 4em;
+    -fx-background-color: #4D7EA8;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+
+.button:hover{
+    -fx-font-size: 4em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #4D7EA8;
+    -fx-border-color: #4D7EA8;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+.button:pressed{
+    -fx-rotate: 10;
+}
+
+#quitButton{
+    -fx-font-size: 2em;
+    -fx-background-color: #ba261b;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+#quitButton:hover {
+    -fx-font-size: 2em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #ba261b;
+    -fx-border-color: #ba261b;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+#quitButton:pressed{
+    -fx-rotate: 10;
+}
+
+
+#mainMenuButton{
+    -fx-font-size: 2em;
+    -fx-background-color: #4D7EA8;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+#mainMenuButton:hover{
+    -fx-font-size: 2em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #4D7EA8;
+    -fx-border-color: #4D7EA8;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+#mainMenuButton:pressed{
+    -fx-rotate: 10;
+}
+
+#easyButton{
+    -fx-font-size: 2em;
+    -fx-background-color: #1dba45;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+
+#easyButton:hover {
+    -fx-font-size: 2em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #1dba45;
+    -fx-border-color: #1dba45;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+#easyButton:pressed{
+    -fx-rotate: 10;
+}
+
+#mediumButton{
+    -fx-font-size: 2em;
+    -fx-background-color: #eca525;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+#mediumButton:hover {
+    -fx-font-size: 2em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #eca525;
+    -fx-border-color: #eca525;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+#mediumButton:pressed{
+    -fx-rotate: 10;
+}
+
+#hardButton{
+    -fx-font-size: 2em;
+    -fx-background-color: #ba261b;
+    -fx-background-radius: 60;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+
+#hardButton:hover {
+    -fx-font-size: 2em;
+    -fx-background-color: white;
+    -fx-background-radius: 60;
+    -fx-text-fill: #ba261b;
+    -fx-border-color: #ba261b;
+    -fx-border-radius: 60;
+    -fx-border-width: 4;
+    -fx-background-insets: 0;
+}
+
+
+#hardButton:pressed{
+    -fx-rotate: 10;
+}
+
