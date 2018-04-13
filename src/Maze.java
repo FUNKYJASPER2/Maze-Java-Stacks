@@ -26,15 +26,15 @@ import static javafx.scene.paint.Color.WHITE;
 public class Maze extends Application implements EventHandler<KeyEvent> {
     private int moveCount = 0;
     private int size;
-    private RandomMaze maze = new RandomMaze(15);
-    private double startX = 775;
-    private double startY = 300;
+    private RandomMaze maze;
+    private double startX = 775;//starting X position for the maze
+    private double startY = 300;//starting Y position for the maze
     private Stage window;
-    private double playerXpos = startX+2;
-    private double playerYpos = startY+2;
-    private int playRow = 0;
-    private int playCol = 0;
-    private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 16, 16);
+    private double playerXpos = startX+2;//player starting X position
+    private double playerYpos = startY+2;//player starting Y position
+    private int playRow = 0;//this keeps track of what row the player is in
+    private int playCol = 0;//this keeps track of what column the player is in
+    private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 16, 16);//player rectangle
     private Text moveCounterTitle = new Text(1675,300, ""+moveCount);
     private Image menuTitle = new Image("menuname.gif");
     private ImageView title = new ImageView(menuTitle);
@@ -43,8 +43,6 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
     @Override
     public void start(Stage stage) {
-        maze.initialize();
-        maze.createMaze();
         window = stage;
         // title set and buttons added to the screen
         stage.setTitle("Maze Game");
@@ -156,7 +154,9 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         easyButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                size = 15;
+                maze = new RandomMaze(15);
+                maze.initialize();
+                maze.createMaze();
                 window.setScene(playGameScene());
             }
         });
@@ -170,7 +170,9 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         mediumButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                size = 25;
+                maze = new RandomMaze(20);
+                maze.initialize();
+                maze.createMaze();
                 window.setScene(playGameScene());
             }
         });
@@ -184,7 +186,9 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         hardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                size = 35;
+                maze = new RandomMaze(30);
+                maze.initialize();
+                maze.createMaze();
                 window.setScene(playGameScene());
             }
         });
@@ -265,22 +269,24 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         double tempX;
         double tempY;
 
+        //for loop will cycle through the elements of the array containing the maze tiles
+        //it will check where its walls are and draw a line if necessary
         for (int i = 0;i < maze.getSize();i++){
             for (int j = 0;j < maze.getSize();j++){
-                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);
+                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
                 mazerec.setFill(Color.rgb(150, 0, 150));
-                root2.getChildren().add(mazerec);
+                root2.getChildren().add(mazerec);//adding rect to screen
                 tempX = gridPosX;
                 tempY = gridPosY;
 
-                if (maze.getMaze()[i][j].isUpWall()) {
+                if (maze.getMaze()[i][j].isUpWall()) {//checking to see if tile has a wall above
                     Line line = new Line(tempX,tempY,tempX+20,tempY);
                     line.setStrokeWidth(1);
                     root2.getChildren().add(line);
 
 
                 }
-                if (maze.getMaze()[i][j].isRightWall()) {
+                if (maze.getMaze()[i][j].isRightWall()) {//checking for wall to the right
                     tempX = gridPosX;
                     tempY = gridPosY;
                     Line line = new Line(tempX+20,tempY,tempX+20,tempY+20);
@@ -288,7 +294,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                     root2.getChildren().add(line);
 
                 }
-                if (maze.getMaze()[i][j].isDownWall()) {
+                if (maze.getMaze()[i][j].isDownWall()) {//checking for wall below
                     tempX = gridPosX;
                     tempY = gridPosY;
                     Line line = new Line(tempX,tempY+20,tempX+20,tempY+20);
@@ -296,7 +302,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                     root2.getChildren().add(line);
 
                 }
-                if (maze.getMaze()[i][j].isLeftWall()) {
+                if (maze.getMaze()[i][j].isLeftWall()) {//checking for wall to the left
                     tempX = gridPosX;
                     tempY = gridPosY;
                     Line line = new Line(tempX,tempY,tempX,tempY+20);
@@ -304,29 +310,15 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                     root2.getChildren().add(line);
 
                 }
-                gridPosX+=20;
+                gridPosX+=20;//moving to the right by a rectangle length to prepare to draw the next
             }
+            //resetting the grid x position and moving to no the next row
             gridPosX = startX;
             gridPosY += 20;
         }
-/*
-        for(int i = 0; i <= 10; i++){
-            for(int k = 0; k <= 10; k++){
-                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);
-                // added borders to tell its not just one big square
-                mazerec.setStrokeWidth(1);
-                mazerec.setStroke(BLACK);
-                // -------------------------------------------
-                mazerec.setFill(Color.rgb(150, 0, 150));
-                root2.getChildren().add(mazerec);
-                gridPosX += 20;
-            }
-            gridPosX = 600;
-            gridPosY += 20;
-        }
-*/
 
 
+        //adding the different scene elements
         root2.getChildren().addAll(mainMenuButton,quitButton,title,movesTitle, moveCounterTitle, recPlayer);
 
         return playGameScene;
@@ -424,18 +416,5 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
 
 
-/* Things to add ----------------------------------------------------------
 
-// level 1
-// level 2
-// level 3
-// high score
-// printing maze
-// limited movements
-
-**** this is dont by printing squares with lines where they need to be than, checks players coordinate and if they are match
-**** the certian cooridnate than the user can only move set ways
-
-
-*/
 
