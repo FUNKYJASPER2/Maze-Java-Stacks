@@ -311,9 +311,21 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         //it will check where its walls are and draw a line if necessary
         for (int i = 0;i < maze.getSize();i++){
             for (int j = 0;j < maze.getSize();j++){
-                Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
-                mazerec.setFill(Color.rgb(150, 0, 150));
-                root2.getChildren().add(mazerec);//adding rect to screen
+                if (j == winCol && i == maze.getSize()-1){
+                    Rectangle winTile = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
+                    winTile.setFill(Color.rgb(200, 0, 0));
+                    root2.getChildren().add(winTile);//adding rect to screen
+                }
+                else if (i == 0 & j == 0){
+                    Rectangle startTile = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
+                    startTile.setFill(Color.rgb(0, 200, 0));
+                    root2.getChildren().add(startTile);//adding rect to screen
+                }
+                else {
+                    Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
+                    mazerec.setFill(Color.rgb(150, 0, 150));
+                    root2.getChildren().add(mazerec);//adding rect to screen
+                }
                 tempX = gridPosX;
                 tempY = gridPosY;
 
@@ -348,6 +360,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                     root2.getChildren().add(line);
 
                 }
+
                 gridPosX+=20;//moving to the right by a rectangle length to prepare to draw the next
             }
             //resetting the grid x position and moving to no the next row
