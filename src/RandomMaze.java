@@ -50,7 +50,6 @@ public class RandomMaze {
     }
     //this method will create a random maze
     public void createMaze(){
-        int count = 0;
         Tile curTile = maze[0][0];
         curTile.setVisited();
         while (notVisited > 1){

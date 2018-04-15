@@ -26,7 +26,7 @@ import java.net.URL;
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
-
+import java.util.Random;
 public class Maze extends Application implements EventHandler<KeyEvent> {
     private int moveCount = 0;
     private int size;
@@ -34,8 +34,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     private double startX = 775;//starting X position for the maze
     private double startY = 300;//starting Y position for the maze
     private Stage window;
-    private double playerXpos = startX+2;//player starting X position
-    private double playerYpos = startY+2;//player starting Y position
+    private double playerXpos = startX + 2;//player starting X position
+    private double playerYpos = startY + 2;//player starting Y position
     private int playRow = 0;//this keeps track of what row the player is in
     private int playCol = 0;//this keeps track of what column the player is in
     private Rectangle recPlayer = new Rectangle(playerXpos, playerYpos, 16, 16);//player rectangle
@@ -45,6 +45,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     final URL resource = getClass().getResource("music.mp3");
     final Media media = new Media(resource.toString());
     final MediaPlayer mediaPlayer = new MediaPlayer(media);
+    private Random rand = new Random();
+    private int winCol;
 
 
 
@@ -56,7 +58,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         // title set and buttons added to the screen
         stage.setTitle("Maze Game");
         stage.setScene(mainMenu());
-        stage.setMaximized(true);
+        stage.setFullScreen(true);
         stage.show();
     }
 
@@ -163,9 +165,18 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         easyButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                winCol = rand.nextInt(15);
                 maze = new RandomMaze(15);
                 maze.initialize();
                 maze.createMaze();
+                playerXpos = startX + 2;
+                playerYpos = startY + 2;
+                playCol = 0;
+                playRow = 0;
+                recPlayer.setX(startX + 2);
+                recPlayer.setY(startY + 2);
+                moveCount = 0;
+                moveCounterTitle.setText(""+ moveCount);
                 window.setScene(playGameScene());
             }
         });
@@ -179,9 +190,18 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         mediumButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                winCol = rand.nextInt(20);
                 maze = new RandomMaze(20);
                 maze.initialize();
                 maze.createMaze();
+                playerXpos = startX + 2;
+                playerYpos = startY + 2;
+                playCol = 0;
+                playRow = 0;
+                recPlayer.setX(startX + 2);
+                recPlayer.setY(startY + 2);
+                moveCount = 0;
+                moveCounterTitle.setText(""+ moveCount);
                 window.setScene(playGameScene());
             }
         });
@@ -195,9 +215,18 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         hardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                winCol = rand.nextInt(30);
                 maze = new RandomMaze(30);
                 maze.initialize();
                 maze.createMaze();
+                playerXpos = startX + 2;
+                playerYpos = startY + 2;
+                playCol = 0;
+                playRow = 0;
+                recPlayer.setX(startX + 2);
+                recPlayer.setY(startY + 2);
+                moveCount = 0;
+                moveCounterTitle.setText(""+ moveCount);
                 window.setScene(playGameScene());
             }
         });
@@ -418,6 +447,9 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             playCol++;
             moveCount++;
             moveCounterTitle.setText(""+moveCount);
+        }
+        if (playCol == winCol && playRow == maze.getSize() - 1){
+
         }
     }
 }
