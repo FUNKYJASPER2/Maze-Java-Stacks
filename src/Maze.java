@@ -58,7 +58,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         // title set and buttons added to the screen
         stage.setTitle("Maze Game");
         stage.setScene(mainMenu());
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -297,7 +297,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         mainMenuButton.setFocusTraversable(false);
         quitButton.setFocusTraversable(false);
 
-        recPlayer.setFill(Color.rgb(255, 0, 0));
+        recPlayer.setFill(Color.web("#4D7EA8"));
         recPlayer.setStroke(BLACK);
 
         // draws the maze for level 1
@@ -323,7 +323,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                 }
                 else {
                     Rectangle mazerec = new Rectangle(gridPosX, gridPosY, 20, 20);//makes a rect for the background
-                    mazerec.setFill(Color.rgb(150, 0, 150));
+                    mazerec.setFill(Color.web("#fcb731"));
                     root2.getChildren().add(mazerec);//adding rect to screen
                 }
                 tempX = gridPosX;
@@ -333,7 +333,6 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
                     Line line = new Line(tempX,tempY,tempX+20,tempY);
                     line.setStrokeWidth(1);
                     root2.getChildren().add(line);
-
 
                 }
                 if (maze.getMaze()[i][j].isRightWall()) {//checking for wall to the right
@@ -462,13 +461,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             moveCounterTitle.setText(""+moveCount);
         }
         if (playCol == winCol && playRow == maze.getSize() - 1){
-
+            System.out.println("Winner");
         }
     }
 }
-
-
-
-
-
-
