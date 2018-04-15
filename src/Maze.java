@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -18,6 +20,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
+
+import java.net.URL;
 
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.GRAY;
@@ -38,11 +42,15 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     private Text moveCounterTitle = new Text(1675,300, ""+moveCount);
     private Image menuTitle = new Image("menuname.gif");
     private ImageView title = new ImageView(menuTitle);
+    final URL resource = getClass().getResource("music.mp3");
+    final Media media = new Media(resource.toString());
+    final MediaPlayer mediaPlayer = new MediaPlayer(media);
 
 
 
     @Override
     public void start(Stage stage) {
+        mediaPlayer.play();
         window = stage;
         // title set and buttons added to the screen
         stage.setTitle("Maze Game");
