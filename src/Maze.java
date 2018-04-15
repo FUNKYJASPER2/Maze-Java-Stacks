@@ -50,6 +50,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
     @Override
     public void start(Stage stage) {
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
         window = stage;
         // title set and buttons added to the screen
@@ -66,7 +67,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         title.setX(525);
 
         // scene is created
-        Scene mainMenuScene = new Scene(root, 1920, 1080, Color.web("#272932"));
+        Scene mainMenuScene = new Scene(root, 1920, 1080, Color.web("#272831"));
         mainMenuScene.getStylesheets().add("Styles.css");
 
         Button playButton = new Button("Play");
@@ -120,7 +121,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     public Scene askSizeScene(){
         Group root4;
         root4 = new Group();
-        Scene askSizeScene = new Scene(root4,1920, 1080, Color.web("#272932"));
+        Scene askSizeScene = new Scene(root4,1920, 1080, Color.web("#272831"));
         askSizeScene.getStylesheets().add("Styles.css");
 
         title.setX(525);
@@ -219,7 +220,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     public Scene playGameScene(){
         Group root2;
         root2 = new Group();
-        Scene playGameScene = new Scene(root2,1920, 1080, Color.web("#272932"));
+        Scene playGameScene = new Scene(root2,1920, 1080, Color.web("#272831"));
         playGameScene.getStylesheets().add("Styles.css");
 
 
@@ -335,7 +336,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     public Scene scoreScene(){
         Group root3;
         root3 = new Group();
-        Scene scoreScene = new Scene(root3,1920, 1080, Color.web("#272932"));
+        Scene scoreScene = new Scene(root3,1920, 1080, Color.web("#272831"));
         scoreScene.getStylesheets().add("Styles.css");
 
 
