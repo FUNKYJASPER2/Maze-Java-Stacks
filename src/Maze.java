@@ -94,7 +94,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             }
         });
 
-        Button scoreButton = new Button("Score");
+        Button scoreButton = new Button("Scores");
         scoreButton.setTranslateX(750);
         scoreButton.setTranslateY(500);
         scoreButton.setMinSize(400,100);
@@ -412,9 +412,22 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
         title.setX(525);
 
-        Text scoreTitle = new Text(800,200,"High Scores");
+        Text scoreTitle = new Text(790,300,"High Scores");
         scoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         scoreTitle.setFill(WHITE);
+        scoreTitle.setUnderline(true);
+
+        Text easyScoreTitle = new Text(800,450,"Easy High Score: " + easyHigh);
+        easyScoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        easyScoreTitle.setFill(WHITE);
+
+        Text mediumScoreTitle = new Text(775,550,"Medium High Score: " + mediumHigh);
+        mediumScoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        mediumScoreTitle.setFill(WHITE);
+
+        Text hardScoreTitle = new Text(795,650,"Hard High Score: " + highHigh);
+        hardScoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        hardScoreTitle.setFill(WHITE);
 
 
         Button mainMenuButton = new Button("Main Menu");
@@ -447,7 +460,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         mainMenuButton.setFocusTraversable(false);
         quitButton.setFocusTraversable(false);
 
-        root3.getChildren().addAll(mainMenuButton,quitButton,title, scoreTitle);
+        root3.getChildren().addAll(mainMenuButton,quitButton,title, scoreTitle, easyScoreTitle, mediumScoreTitle, hardScoreTitle);
 
         return scoreScene;
     }
