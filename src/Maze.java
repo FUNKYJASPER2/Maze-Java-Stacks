@@ -20,13 +20,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
-
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 
 import static javafx.scene.paint.Color.BLACK;
 import static javafx.scene.paint.Color.GRAY;
 import static javafx.scene.paint.Color.WHITE;
 import java.util.Random;
+import java.util.Scanner;
+
 public class Maze extends Application implements EventHandler<KeyEvent> {
     private int moveCount = 0;
     private int size;
@@ -47,6 +52,11 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     final MediaPlayer mediaPlayer = new MediaPlayer(media);
     private Random rand = new Random();
     private int winCol;
+    private static int easyHigh;
+    private static int mediumHigh;
+    private static int highHigh;
+    private int diffculty;
+    private static boolean gameover = false;
 
 
 
@@ -165,6 +175,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         easyButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                diffculty = 1;
                 winCol = rand.nextInt(15);
                 maze = new RandomMaze(15);
                 maze.initialize();
@@ -190,6 +201,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         mediumButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                diffculty = 2;
                 winCol = rand.nextInt(20);
                 maze = new RandomMaze(20);
                 maze.initialize();
@@ -215,6 +227,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         hardButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                diffculty = 3;
                 winCol = rand.nextInt(30);
                 maze = new RandomMaze(30);
                 maze.initialize();
@@ -262,6 +275,22 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         Text movesTitle = new Text(1475,300,"Moves: ");
         movesTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         movesTitle.setFill(WHITE);
+
+        String scorePrint = "";
+
+        if(diffculty ==1){
+            scorePrint = "" + easyHigh;
+        }
+        if(diffculty ==2){
+            scorePrint = "" + mediumHigh;
+        }
+        if(diffculty ==3){
+            scorePrint = "" + highHigh;
+        }
+
+        Text highScore = new Text(150,300,"High Score: " + scorePrint);
+        highScore.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        highScore.setFill(WHITE);
 
         moveCounterTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         moveCounterTitle.setFill(WHITE);
@@ -369,7 +398,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
 
 
         //adding the different scene elements
-        root2.getChildren().addAll(mainMenuButton,quitButton,title,movesTitle, moveCounterTitle, recPlayer);
+        root2.getChildren().addAll(mainMenuButton,quitButton,title,movesTitle, moveCounterTitle, recPlayer, highScore);
 
         return playGameScene;
     }
@@ -423,9 +452,105 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
         return scoreScene;
     }
 
+    public Scene winnerScene() throws IOException{
+        Group root3;
+        root3 = new Group();
+        Scene winnerScene = new Scene(root3,1920, 1080, Color.web("#272831"));
+        winnerScene.getStylesheets().add("Styles.css");
 
 
-    public static void main(String[] args) {
+        title.setX(525);
+
+        Text winnerTitle = new Text(865,300,"Winner");
+        winnerTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        winnerTitle.setFill(WHITE);
+
+        Text winnerScoreTitle = new Text(700,350,"Your Score Was: " + moveCount);
+        winnerScoreTitle.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        winnerScoreTitle.setFill(WHITE);
+
+
+        Button mainMenuButton = new Button("Play Again");
+        mainMenuButton.setTranslateX(750);
+        mainMenuButton.setTranslateY(500);
+        mainMenuButton.setMinSize(400,100);
+        // event handler for when its clicked and changes the color
+        mainMenuButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                window.setScene(askSizeScene());
+            }
+        });
+
+
+        Button quitButton = new Button("Quit");
+        quitButton.setTranslateX(750);
+        quitButton.setTranslateY(700);
+        quitButton.setMinSize(400,100);
+        // event handler for when its clicked and changes the color
+        quitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.exit(1);
+            }
+        });
+
+        mainMenuButton.setFocusTraversable(false);
+        quitButton.setFocusTraversable(false);
+
+        if(diffculty == 1){
+            if(moveCount < easyHigh){
+                easyHigh = moveCount;
+            }
+        }
+        if(diffculty == 2){
+            if(moveCount < mediumHigh){
+                mediumHigh = moveCount;
+            }
+        }
+        if(diffculty == 3){
+            if(moveCount < highHigh){
+                highHigh = moveCount;
+            }
+        }
+
+        System.out.println("testtt");
+        PrintWriter write = new PrintWriter("highScores");
+
+        write.print(easyHigh + "\t");
+        write.print(mediumHigh + "\t");
+        write.print(highHigh + "\t");
+
+        write.close();
+
+        root3.getChildren().addAll(mainMenuButton,quitButton,title, winnerTitle, winnerScoreTitle);
+
+        return winnerScene;
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) throws IOException {
+        FileReader reader = new FileReader("highScores");
+        //PrintWriter write = new PrintWriter("highScores");
+        Scanner read = new Scanner(reader);
+        int count = 1;
+        while(read.hasNext()){
+            if(count == 1){
+                easyHigh = read.nextInt();
+            }
+            if(count == 2){
+                mediumHigh = read.nextInt();
+            }
+            if(count == 3){
+                highHigh = read.nextInt();
+            }
+            count ++;
+        }
         launch(args);
     }
 
@@ -461,7 +586,11 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             moveCounterTitle.setText(""+moveCount);
         }
         if (playCol == winCol && playRow == maze.getSize() - 1){
-            System.out.println("Winner");
+            try {
+                window.setScene(winnerScene());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
