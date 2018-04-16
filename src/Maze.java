@@ -56,7 +56,6 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
     private static int mediumHigh;
     private static int highHigh;
     private int diffculty;
-    private static boolean gameover = false;
 
 
 
@@ -176,6 +175,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             @Override
             public void handle(MouseEvent event) {
                 diffculty = 1;
+                startX = 800;
+                startY = 300;
                 winCol = rand.nextInt(15);
                 maze = new RandomMaze(15);
                 maze.initialize();
@@ -202,6 +203,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             @Override
             public void handle(MouseEvent event) {
                 diffculty = 2;
+                startX = 750;
+                startY = 300;
                 winCol = rand.nextInt(20);
                 maze = new RandomMaze(20);
                 maze.initialize();
@@ -228,6 +231,8 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             @Override
             public void handle(MouseEvent event) {
                 diffculty = 3;
+                startX = 650;
+                startY = 300;
                 winCol = rand.nextInt(30);
                 maze = new RandomMaze(30);
                 maze.initialize();
@@ -288,7 +293,7 @@ public class Maze extends Application implements EventHandler<KeyEvent> {
             scorePrint = "" + highHigh;
         }
 
-        Text highScore = new Text(150,300,"High Score: " + scorePrint);
+        Text highScore = new Text(100,300,"High Score: " + scorePrint);
         highScore.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         highScore.setFill(WHITE);
 
